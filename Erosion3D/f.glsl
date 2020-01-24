@@ -2,6 +2,15 @@
 out vec4 FragColor;
 in vec3 pos;
 
+float near = 0.1; 
+float far  = 300.0; 
+  
+float LinearizeDepth(float depth) 
+{
+    float z = depth * 2.0 - 1.0; // back to NDC 
+    return (2.0 * near * far) / (far + near - z * (far - near));	
+}
+
 void main()
 {
     float ratio = 2.0 * pos.z / 100.0;
@@ -10,8 +19,6 @@ void main()
     float g = 1.0 - b - r;
 
     float w = pos.z/100.0;
-    if(gl_FrontFacing)
-        FragColor = vec4(r,g,b, 1.0f);
-    else
-        FragColor = vec4(r,g,b, 0.0f);
+    float depth = LinearizeDepth(gl_FragCoord.z) / far;
+    FragColor = vec4(vec3(w), 1.0);
 } 

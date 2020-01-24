@@ -1,8 +1,7 @@
-#include "erosion.h"
 #include <ctime>
-#include "PerlinNoise.h"
 #include <random>
 #include <iostream>
+#include "erosion.h"
 #include "PerlinNoise.h"
 
 template <class T>
@@ -369,7 +368,11 @@ void Erosion::Erode(double mx, double my) {
                 water = calcWater(water, config->evaporateSpeed);
             }
         }
-        else { return; }
+        else
+        {
+            grid->Brush(cx_int, cy_int, 2, -abs(sediment) / 38.0);
+	        return;
+        }
     }
 }
 
