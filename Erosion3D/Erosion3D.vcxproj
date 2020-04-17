@@ -153,7 +153,6 @@ xcopy /y $(ProjectDir)f.glsl  $(OutDir)</Command>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="stb_image.cpp" />
-    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="erosion.h" />
@@ -162,7 +161,6 @@ xcopy /y $(ProjectDir)f.glsl  $(OutDir)</Command>
     <ClInclude Include="shader_s.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TrianglePlane.h" />
-    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="f.glsl" />

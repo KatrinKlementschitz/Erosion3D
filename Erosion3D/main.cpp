@@ -17,14 +17,14 @@ glm::mat4 projection = glm::perspective(glm::radians(45.0f), Width / Height, 0.1
 
 class Timing
 {
-	float lastFrame = 0.0f;
+	double lastFrame = 0.0f;
 
 public:
-	float deltaTime = 0.0f;
+	double deltaTime = 0.0f;
 
 	void Update()
 	{
-		float currentFrame = glfwGetTime();
+		const double currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 	}
@@ -54,8 +54,8 @@ void CursorCallback(GLFWwindow* window, double xpos, double ypos)
 		firstMouse = false;
 	}
 
-	float xoffset = xpos - lastX;
-	float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+	const float xoffset = xpos - lastX;
+	const float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
 
 	lastX = xpos;
 	lastY = ypos;
@@ -66,8 +66,8 @@ void CursorCallback(GLFWwindow* window, double xpos, double ypos)
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
-	Width = width;
-	Height = height;
+	Width = static_cast<float>(width);
+	Height = static_cast<float>(height);
 	projection = glm::perspective(glm::radians(45.0f), Width / Height, 0.1f, 600.0f);
 }
 
@@ -131,7 +131,7 @@ GLFWwindow* CreateWindow(int Width, int Height, const char* title)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	GLFWwindow* window = glfwCreateWindow(Width, Height, title, NULL, NULL);
-	if (window == NULL)
+	if (window == nullptr)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
@@ -175,7 +175,7 @@ void UpdateTerrain(Erosion e, TrianglePlane *t)
 {
 	for (int i = 0; i < t->size; i++)
 	{
-		t->SetHeight(i, (e.grid->arr[i]) * 100.0);
+		t->SetHeight(i, static_cast<float>(e.grid->arr[i]) * 100.0);
 	}
 	t->UpdateBuffer();
 }
@@ -201,11 +201,11 @@ int main()
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		
 	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0,0,0));
+	model = rotate(model, glm::radians(-90.0f), glm::vec3(1.0,0,0));
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-	glCullFace(GL_FRONT);
+	glCullFace(GL_BACK);
 
 	while (!glfwWindowShouldClose(window))
 	{

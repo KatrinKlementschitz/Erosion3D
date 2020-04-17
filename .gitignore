@@ -1,0 +1,12 @@
+
+*.obj
+*.pdb
+*.tlog
+*.log
+*.ipdb
+*.iobj
+*.idb
+*.ilk
+*.ipch
+*.opendb
+.vs/

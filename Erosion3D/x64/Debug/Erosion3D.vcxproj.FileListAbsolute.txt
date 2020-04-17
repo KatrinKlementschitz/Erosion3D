@@ -1,0 +1,2 @@
+D:\visualStudio\GitHub\Erosion3D\Erosion3D\x64\Debug\Erosion3D.exe
+D:\visualStudio\GitHub\Erosion3D\Erosion3D\x64\Debug\Erosion3D.pdb
