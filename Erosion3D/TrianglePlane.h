@@ -66,7 +66,8 @@ public:
 	void UpdateBuffer()
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * vertices_size_, &vertices[0]);
+
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices_size_, &vertices[0], GL_DYNAMIC_DRAW);
 	}
 
 private:

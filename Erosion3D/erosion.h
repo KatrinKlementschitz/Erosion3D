@@ -19,31 +19,36 @@ public:
 
     double GetVal(int row, int column)
     {
-        if (row < rows && column < columns)
-            return arr[column * rows + row];
+        if (row < 0 || column < 0 || row >= rows || column >= columns)
+            return 0;
+
+        return arr[column * rows + row];
     }
 
     void SetVal(int row, int column, double val)
     {
-        if (row < rows && column < columns)
-            if (!isnan(val) && !isinf(val))
-                arr[column * rows + row] = val;
+        if (row < 0 || column < 0 || row >= rows || column >= columns)
+            return;
+        if (!isnan(val) && !isinf(val))
+            arr[column * rows + row] = val;
     }
 
     void AddVal(int row, int column, double val)
     {
+        if (row < 0 || column < 0 || row >= rows || column >= columns)
+            return;
         if(arr[column * rows + row] + val < 0)
             return;
-        if (row < rows && column < columns)
-            if (!isnan(val) && !isinf(val))
-                arr[column * rows + row] += val;
+        if (!isnan(val) && !isinf(val))
+            arr[column * rows + row] += val;
     }
 
     void MultVal(int row, int column, double val)
     {
-        if (row < rows && column < columns)
-            if (!isnan(val) && !isinf(val))
-                arr[column * rows + row] *= val;
+        if (row < 0 || column < 0 || row >= rows || column >= columns)
+            return;
+        if (!isnan(val) && !isinf(val))
+            arr[column * rows + row] *= val;
     }
 
     void Normalize();

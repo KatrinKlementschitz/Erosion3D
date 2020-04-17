@@ -388,30 +388,27 @@ void Erosion::Erode(int iter) {
     }
 }
 
-Erosion::Erosion(int pwidth, int pheight, int iter, Erosion::Config pconfig)
+Erosion::Erosion(int pwidth, int pheight, int iter, Config pconfig)
 {
     grid = new Grid(pwidth, pheight);
     width = pwidth;
     height = pheight;
     config = &pconfig;
 
-    re.seed(time(0));
+    re.seed(time(nullptr));
     std::uniform_real_distribution<double> unif(0, 1000);
     double r = unif(re);
-    double r1 = unif(re);
-    double r2 = unif(re);
-    double r3 = unif(re);
     double fac = 0.005;
-    PerlinNoise pn(time(0));
+    PerlinNoise pn(time(nullptr));
 
     for (int i = 0; i < pwidth; i++)
     {
         for (int j = 0; j < pheight; j++)
         {
             double n = pn.noise(i * fac, j * fac, r);
-            n += pn.noise(i * fac * 2, j * fac * 2, r1 + 10) * 0.5;
-            n += pn.noise(i * fac * 4, j * fac * 4, r2 + 20) * 0.125;
-            n += pn.noise(i * fac * 8, j * fac * 8, r3 + 30) * 0.125;
+            n += pn.noise(i * fac * 2, j * fac * 2, r + 10) * 0.5;
+            n += pn.noise(i * fac * 4, j * fac * 4, r + 20) * 0.125;
+            n += pn.noise(i * fac * 8, j * fac * 8, r + 30) * 0.125;
             grid->SetVal(i, j, n);
         }
     }

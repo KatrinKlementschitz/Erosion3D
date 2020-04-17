@@ -192,12 +192,13 @@ int main()
 	ourShader.use();
 
 	Erosion::Config c;
-	Erosion erosion(201,201,600000, c);
+	Erosion erosion(201,201, 600000, c);
 	erosion.grid->Blur(1.0 / 3.0);
-	//TrianglePlane t(200, 200, &erosion.grid->arr[0]);
-	TrianglePlane *t = new TrianglePlane(200, 200);
-
-	UpdateTerrain(erosion, t);
+	
+	TrianglePlane t(200, 200, &erosion.grid->arr[0]);
+	/*TrianglePlane *t = new TrianglePlane(200, 200);
+	erosion.Erode(600000);
+	UpdateTerrain(erosion, t);*/
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		
 	glm::mat4 model = glm::mat4(1.0f);
@@ -227,7 +228,7 @@ int main()
 
 		/*erosion.Erode(10);
 		UpdateTerrain(erosion, t);*/
-		t->Draw();
+		t.Draw();
 		
 
 		glfwSwapBuffers(window);
